@@ -1,0 +1,82 @@
+custom-side-menu {
+
+  // ------------------------------------ //
+  // Global variables                     //
+  // ------------------------------------ //
+  $item-color-bg: var(--my-custom-color);
+  $header-color-bg: var(--my-custom-color);
+  $animation-duration: 0.2s;
+  // ------------------------------------ //
+  // Hide scroll bar in the side menu     //
+  // ------------------------------------ //
+  ion-menu ion-content .scroll-content::-webkit-scrollbar {
+    display: none;
+  }
+
+  ion-item {
+    &.item.item-block {
+      border-bottom: 1px solid $item-color-bg;
+    }
+
+    & [item-left],
+    & [item-right] {
+      margin-left: 0;
+    }
+
+    & ion-icon[item-left] + .item-inner,
+    & ion-icon[item-left] + .item-input {
+      margin-left: 8px;
+    }
+  }
+
+  // ------------------------------------ //
+  // Multi level items                    //
+  // ------------------------------------ //
+  ion-list.accordion-menu {
+    background: var(--my-custom-color);
+
+    ion-item {
+      --background: $header-color-bg;
+      color: var(--ion-color-medium);
+      font-weight: normal;
+      font-size: 14px;
+    }
+
+    ion-item.header {
+      ion-icon.header-icon {
+        will-change: transform;
+        transition: transform $animation-duration ease;
+
+        &.rotate {
+          -webkit-transform: rotate(-180deg);
+          -moz-transform: rotate(-180deg);
+          -ms-transform: rotate(-180deg);
+          -o-transform: rotate(-180deg);
+          transform: rotate(-180deg);
+        }
+      }
+    }
+
+    div.options {
+      will-change: height;
+      // transition: height $animation-duration ease;
+      overflow-y: hidden;
+      height: 0;
+    }
+
+    // Sub options without icons
+    ion-item.item.item-block.item-ios.no-icon .item-inner {
+      margin-left: 48px;
+    }
+
+    ion-item.item.item-block.item-md.no-icon .item-inner,
+    ion-item.item.item-block.item-wp.no-icon .item-inner {
+      margin-left: 40px;
+    }
+  }
+
+  .active {
+    background: var(--ion-color-primary);
+    color: var(--ion-color-dark) !important;
+  }
+}

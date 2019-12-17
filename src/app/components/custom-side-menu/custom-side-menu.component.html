@@ -1,0 +1,41 @@
+<ion-list lines="none" class="accordion-menu">
+    <ng-template ngFor let-item [ngForOf]="menuList">
+        <ng-template [ngIf]="!item.hasChild" [ngIfElse]="child">
+            <ion-menu-toggle auto-hide="false">
+                <ion-item [routerDirection]="'root'" [routerLink]="[item.url]">
+                    <ion-icon slot="start" [name]="item.iconName" color="warning"></ion-icon>
+                    <ion-label>
+                        {{item.displayText}}
+                    </ion-label>
+                </ion-item>
+            </ion-menu-toggle>
+        </ng-template>
+        <ng-template #child>
+            <ion-item class="header" (click)="toggle(item)">
+                <ion-icon slot="start" [name]="item?.iconName" color="warning"></ion-icon>
+                <ion-label>
+                    {{item.displayText}}
+                </ion-label>
+                <ion-icon slot="end" [class.rotate]="item?.expanded" class="header-icon" name="ios-arrow-down"
+                          color="light"></ion-icon>
+            </ion-item>
+            <div [style.height]="item.expanded ? ((optionHeight + 1) * item.subOptions.length) + 'px' : '0px'"
+                 class="options">
+                <ng-template ngFor let-child [ngForOf]="item.subOptions">
+                    <ion-menu-toggle auto-hide="false">
+                        <ion-item class="sub-option ion-no-margin ion-margin-start"
+                                  [style.padding-left]="paddingLeft + 'px'"
+                                  routerLinkActive="active" [routerDirection]="'root'" [routerLink]="[child.url]">
+                            <ion-icon *ngIf="child?.iconName" [name]="child.iconName" slot="start"
+                                      color="warning"></ion-icon>
+                            <ion-label>
+                                {{child.displayText}}
+                            </ion-label>
+                            <ion-badge slot="end" *ngIf="child?.badge">{{ child.badge }}</ion-badge>
+                        </ion-item>
+                    </ion-menu-toggle>
+                </ng-template>
+            </div>
+        </ng-template>
+    </ng-template>
+</ion-list>

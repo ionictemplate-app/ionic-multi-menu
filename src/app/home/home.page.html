@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            Home
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card class="welcome-card" *ngFor="let item of list" href="https://codecanyon.net/user/captain96778/portfolio"
+              target="_blank">
+        <img [src]="item.img">
+        <ion-label>
+            <h4>{{item.name}}</h4>
+        </ion-label>
+    </ion-card>
+</ion-content>
